@@ -14,12 +14,12 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "foregroundImage": "./assets//images/adaptive-icon.png",
+        "monochromeImage": "./assets/images/adaptive-icon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.owen01.miexpoapp"
     },
     "web": {
       "output": "static",
@@ -30,19 +30,52 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/splash-icon-light.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
+            "image": "./assets/images/splash-icon-dark.png",
             "backgroundColor": "#000000"
           }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+          "./assets/fonts/InterTight-Black.ttf",
+          "./assets/fonts/InterTight-BlackItalic.ttf",
+          "./assets/fonts/InterTight-Bold.ttf",
+          "./assets/fonts/InterTight-BoldItalic.ttf",
+          "./assets/fonts/InterTight-ExtraBold.ttf",
+          "./assets/fonts/InterTight-ExtraBoldItalic.ttf",
+          "./assets/fonts/InterTight-ExtraLight.ttf",
+          "./assets/fonts/InterTight-ExtraLightItalic.ttf",
+          "./assets/fonts/InterTight-Italic.ttf",
+          "./assets/fonts/InterTight-Light.ttf",
+          "./assets/fonts/InterTight-LightItalic.ttf",
+          "./assets/fonts/InterTight-Medium.ttf",
+          "./assets/fonts/InterTight-MediumItalic.ttf",
+          "./assets/fonts/InterTight-Regular.ttf",
+          "./assets/fonts/InterTight-SemiBold.ttf",
+          "./assets/fonts/InterTight-SemiBoldItalic.ttf",
+          "./assets/fonts/InterTight-Thin.ttf",
+          "./assets/fonts/InterTight-ThinItalic.ttf"
+
+          ]
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a5da72b1-f7c7-4f57-bbe1-8ed42706d5bb"
+      }
     }
   }
 }

@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@import "uniwind";
+
+@theme {
+
+  /* Base sans */
+  --font-sans: "InterTight-Regular";
+
+  /* Weight variants */
+  --font-sans-thin: "InterTight-Thin";
+  --font-sans-extralight: "InterTight-ExtraLight";
+  --font-sans-light: "InterTight-Light";
+  --font-sans-medium: "InterTight-Medium";
+  --font-sans-semibold: "InterTight-SemiBold";
+  --font-sans-bold: "InterTight-Bold";
+  --font-sans-extrabold: "InterTight-ExtraBold";
+  --font-sans-black: "InterTight-Black";
+
+  /* Italics */
+  --font-sans-italic: "InterTight-Italic";
+  --font-sans-thin-italic: "InterTight-ThinItalic";
+  --font-sans-extralight-italic: "InterTight-ExtraLightItalic";
+  --font-sans-light-italic: "InterTight-LightItalic";
+  --font-sans-medium-italic: "InterTight-MediumItalic";
+  --font-sans-semibold-italic: "InterTight-SemiBoldItalic";
+  --font-sans-bold-italic: "InterTight-BoldItalic";
+  --font-sans-extrabold-italic: "InterTight-ExtraBoldItalic";
+  --font-sans-black-italic: "InterTight-BlackItalic";
+}
