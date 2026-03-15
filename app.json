@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mi-expo-app",
-    "slug": "mi-expo-app",
+    "name": "MoneyTrack",
+    "slug": "moneytrack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "miexpoapp",
+    "scheme": "moneytrack",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -19,7 +19,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.owen01.miexpoapp"
+      "package": "com.owen01.moneytrack"
     },
     "web": {
       "output": "static",
