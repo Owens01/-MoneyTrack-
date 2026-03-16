@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MoneyTrack",
-    "slug": "moneytrack",
+    "slug": "mi-expo-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.owen01.moneytrack"
     },
     "android": {
       "adaptiveIcon": {
@@ -44,25 +45,24 @@
         "expo-font",
         {
           "fonts": [
-          "./assets/fonts/InterTight-Black.ttf",
-          "./assets/fonts/InterTight-BlackItalic.ttf",
-          "./assets/fonts/InterTight-Bold.ttf",
-          "./assets/fonts/InterTight-BoldItalic.ttf",
-          "./assets/fonts/InterTight-ExtraBold.ttf",
-          "./assets/fonts/InterTight-ExtraBoldItalic.ttf",
-          "./assets/fonts/InterTight-ExtraLight.ttf",
-          "./assets/fonts/InterTight-ExtraLightItalic.ttf",
-          "./assets/fonts/InterTight-Italic.ttf",
-          "./assets/fonts/InterTight-Light.ttf",
-          "./assets/fonts/InterTight-LightItalic.ttf",
-          "./assets/fonts/InterTight-Medium.ttf",
-          "./assets/fonts/InterTight-MediumItalic.ttf",
-          "./assets/fonts/InterTight-Regular.ttf",
-          "./assets/fonts/InterTight-SemiBold.ttf",
-          "./assets/fonts/InterTight-SemiBoldItalic.ttf",
-          "./assets/fonts/InterTight-Thin.ttf",
-          "./assets/fonts/InterTight-ThinItalic.ttf"
-
+            "./assets/fonts/InterTight-Black.ttf",
+            "./assets/fonts/InterTight-BlackItalic.ttf",
+            "./assets/fonts/InterTight-Bold.ttf",
+            "./assets/fonts/InterTight-BoldItalic.ttf",
+            "./assets/fonts/InterTight-ExtraBold.ttf",
+            "./assets/fonts/InterTight-ExtraBoldItalic.ttf",
+            "./assets/fonts/InterTight-ExtraLight.ttf",
+            "./assets/fonts/InterTight-ExtraLightItalic.ttf",
+            "./assets/fonts/InterTight-Italic.ttf",
+            "./assets/fonts/InterTight-Light.ttf",
+            "./assets/fonts/InterTight-LightItalic.ttf",
+            "./assets/fonts/InterTight-Medium.ttf",
+            "./assets/fonts/InterTight-MediumItalic.ttf",
+            "./assets/fonts/InterTight-Regular.ttf",
+            "./assets/fonts/InterTight-SemiBold.ttf",
+            "./assets/fonts/InterTight-SemiBoldItalic.ttf",
+            "./assets/fonts/InterTight-Thin.ttf",
+            "./assets/fonts/InterTight-ThinItalic.ttf"
           ]
         }
       ]
@@ -76,6 +76,7 @@
       "eas": {
         "projectId": "a5da72b1-f7c7-4f57-bbe1-8ed42706d5bb"
       }
-    }
+    },
+    "owner": "owen01"
   }
 }
