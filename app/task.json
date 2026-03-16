@@ -1,0 +1,34 @@
+{
+  "tasks": [
+    {
+      "id": "task-1",
+      "title": "Create Add Expense Modal",
+      "status": "pending",
+      "description": "A modal form to add new expenses with fields for Title, Amount, Category (Food, Transport, Data, Rent, etc.), and Date. Include a save button."
+    },
+    {
+      "id": "task-2",
+      "title": "Create History Tab Screen",
+      "status": "pending",
+      "description": "A screen displaying a full list of past transactions with filtering by category and date range."
+    },
+    {
+      "id": "task-3",
+      "title": "Create Profile Tab Screen",
+      "status": "pending",
+      "description": "User profile screen showing user info, budget settings (edit monthly limit), theme toggle, and logout button."
+    },
+    {
+      "id": "task-4",
+      "title": "Create Authentication Screens",
+      "status": "pending",
+      "description": "Login and Signup screens with email/password fields, validation, and navigation to onboarding."
+    },
+    {
+      "id": "task-5",
+      "title": "Create Onboarding Screen",
+      "status": "pending",
+      "description": "A welcome screen explaining the app's value proposition and a step to set the initial monthly budget."
+    }
+  ]
+}

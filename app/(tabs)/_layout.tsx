@@ -1,60 +1,63 @@
-import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { Home, List, User } from "lucide-react-native";
+import { useColorScheme } from "react-native";
 
-export default function TabLayout() {
+export default function TabsLayout() {
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === "dark";
+
+  // Emerald Green Theme colors
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: "600",
-        },
-        tabBarInactiveTintColor: "#8d8962",
         tabBarStyle: {
-          backgroundColor: "#f0f0f0",
-          borderTopWidth: 1,
-          elevation: 20,
+          backgroundColor: isDark ? "#0f172a" : "#ffffff",
+          borderTopColor: isDark ? "#1e293b" : "#f1f5f9",
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
         },
+        tabBarActiveTintColor: isDark ? "#34d399" : "#10b981", // Emerald
+        tabBarInactiveTintColor: isDark ? "#64748b" : "#94a3b8",
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="search-outline" size={20} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="about"
-        options={{
-          title: "About",
-          tabBarIcon: ({ color }) => (
-            <Ionicons
-              name="information-circle-outline"
-              size={20}
-              color={color}
+          tabBarIcon: ({ focused }) => (
+            <Home
+              className={focused ? "text-emerald-500" : "text-slate-400"}
+              size={24}
+              strokeWidth={focused ? 2.5 : 2}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="history"
         options={{
-          title: "Settings",
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="settings-outline" size={20} color={color} />
+          title: "History",
+          tabBarIcon: ({ focused }) => (
+            <List
+              className={focused ? "text-emerald-500" : "text-slate-400"}
+              size={24}
+              strokeWidth={focused ? 2.5 : 2}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ focused }) => (
+            <User
+              className={focused ? "text-emerald-500" : "text-slate-400"}
+              size={24}
+              strokeWidth={focused ? 2.5 : 2}
+            />
           ),
         }}
       />

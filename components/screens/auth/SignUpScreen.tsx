@@ -17,7 +17,7 @@ export function SignUpScreen() {
 
   const onSubmit = (data: any) => { 
     login(data); 
-    router.replace("/(tabs)");
+    router.replace("./OnboardingScreen");
   };
 
   return (
