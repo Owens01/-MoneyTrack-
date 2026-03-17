@@ -6,7 +6,6 @@ export default function TabsLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
 
-  // Emerald Green Theme colors
   return (
     <Tabs
       screenOptions={{
@@ -14,11 +13,8 @@ export default function TabsLayout() {
         tabBarStyle: {
           backgroundColor: isDark ? "#0f172a" : "#ffffff",
           borderTopColor: isDark ? "#1e293b" : "#f1f5f9",
-          height: 60,
-          paddingBottom: 8,
-          paddingTop: 8,
         },
-        tabBarActiveTintColor: isDark ? "#34d399" : "#10b981", // Emerald
+        tabBarActiveTintColor: isDark ? "#34d399" : "#10b981", 
         tabBarInactiveTintColor: isDark ? "#64748b" : "#94a3b8",
       }}
     >
