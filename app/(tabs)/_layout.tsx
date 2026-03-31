@@ -6,6 +6,12 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: "#ffffff",
+          borderTopColor: "#f1f5f9",
+        },
+        tabBarActiveTintColor: "#34d399",
+        tabBarInactiveTintColor: "#64748b",
       }}
     >
       <Tabs.Screen
@@ -14,7 +20,7 @@ export default function TabsLayout() {
           title: "Home",
           tabBarIcon: ({ focused }) => (
             <Home
-              className={focused ? "text-red-500" : "text-slate-400"}
+              className={focused ? "text-emerald-500" : "text-slate-400"}
               size={24}
               strokeWidth={focused ? 2.5 : 2}
             />
