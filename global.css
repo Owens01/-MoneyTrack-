@@ -53,8 +53,6 @@
   --color-ring: #dc2626;
 
   --radius-xl: 12px;
-
-  --color-blue-500: #3b82f6;
 }
 
 .dark {
@@ -82,6 +80,4 @@
   --color-border: #334155;
   --color-input: #334155;
   --color-ring: #ef4444;
-
-  --color-blue-500: #3b82f6;
 }

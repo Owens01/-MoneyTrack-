@@ -1,0 +1,88 @@
+import { Transaction } from "@/base/interface/history";
+
+export const MOCK_TRANSACTIONS: Transaction[] = [
+  {
+    id: "1",
+    title: "Lunch at Jollof Spot",
+    amount: 3500,
+    category: "Food",
+    date: "2024-01-15",
+  },
+  {
+    id: "2",
+    title: "Uber to Office",
+    amount: 2500,
+    category: "Transport",
+    date: "2024-01-15",
+  },
+  {
+    id: "3",
+    title: "MTN Data Subscription",
+    amount: 2000,
+    category: "Data",
+    date: "2024-01-14",
+  },
+  {
+    id: "4",
+    title: "Monthly Rent",
+    amount: 150000,
+    category: "Rent",
+    date: "2024-01-01",
+  },
+  {
+    id: "5",
+    title: "School Fees Payment",
+    amount: 50000,
+    category: "School Fees",
+    date: "2024-01-05",
+  },
+  {
+    id: "6",
+    title: "Groceries at Market",
+    amount: 12000,
+    category: "Food",
+    date: "2024-01-12",
+  },
+  {
+    id: "7",
+    title: "New Shoes",
+    amount: 15000,
+    category: "Shopping",
+    date: "2024-01-10",
+  },
+  {
+    id: "8",
+    title: "Bus Fare",
+    amount: 500,
+    category: "Transport",
+    date: "2024-01-13",
+  },
+  {
+    id: "9",
+    title: "Airtime Top-up",
+    amount: 1000,
+    category: "Data",
+    date: "2024-01-11",
+  },
+  {
+    id: "10",
+    title: "Dinner with Friends",
+    amount: 8000,
+    category: "Food",
+    date: "2024-01-09",
+  },
+  {
+    id: "11",
+    title: "Keke NAPEP",
+    amount: 300,
+    category: "Transport",
+    date: "2024-01-08",
+  },
+  {
+    id: "12",
+    title: "Textbooks",
+    amount: 5000,
+    category: "School Fees",
+    date: "2024-01-07",
+  },
+];

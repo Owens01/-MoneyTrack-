@@ -14,7 +14,6 @@ export const lightTheme = {
 
   muted: "#F1F5F9",
   muted_foreground: "#64748B",
-  blue500: "#3B82F6",
 
   accent: "#DC2626",
   accent_foreground: "#FFFFFF",

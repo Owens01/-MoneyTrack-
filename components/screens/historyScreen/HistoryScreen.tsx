@@ -1,4 +1,5 @@
-import { Calendar, Filter, TrendingUp, X } from "lucide-react-native";
+import { CategoryType, Transaction } from "@/base/interface/history";
+import { Calendar, Filter, TrendingUp } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import {
   FlatList,
@@ -9,23 +10,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-type CategoryType =
-  | "Food"
-  | "Transport"
-  | "Data"
-  | "Rent"
-  | "School Fees"
-  | "Shopping"
-  | "Other";
-
-interface Transaction {
-  id: string;
-  title: string;
-  amount: number;
-  category: CategoryType;
-  date: string; // YYYY-MM-DD format
-}
+import { MOCK_TRANSACTIONS } from "./mockData";
 
 const CATEGORIES: (CategoryType | "All")[] = [
   "All",
@@ -36,94 +21,6 @@ const CATEGORIES: (CategoryType | "All")[] = [
   "School Fees",
   "Shopping",
   "Other",
-];
-
-// Mock Data
-const MOCK_TRANSACTIONS: Transaction[] = [
-  {
-    id: "1",
-    title: "Lunch at Jollof Spot",
-    amount: 3500,
-    category: "Food",
-    date: "2024-01-15",
-  },
-  {
-    id: "2",
-    title: "Uber to Office",
-    amount: 2500,
-    category: "Transport",
-    date: "2024-01-15",
-  },
-  {
-    id: "3",
-    title: "MTN Data Subscription",
-    amount: 2000,
-    category: "Data",
-    date: "2024-01-14",
-  },
-  {
-    id: "4",
-    title: "Monthly Rent",
-    amount: 150000,
-    category: "Rent",
-    date: "2024-01-01",
-  },
-  {
-    id: "5",
-    title: "School Fees Payment",
-    amount: 50000,
-    category: "School Fees",
-    date: "2024-01-05",
-  },
-  {
-    id: "6",
-    title: "Groceries at Market",
-    amount: 12000,
-    category: "Food",
-    date: "2024-01-12",
-  },
-  {
-    id: "7",
-    title: "New Shoes",
-    amount: 15000,
-    category: "Shopping",
-    date: "2024-01-10",
-  },
-  {
-    id: "8",
-    title: "Bus Fare",
-    amount: 500,
-    category: "Transport",
-    date: "2024-01-13",
-  },
-  {
-    id: "9",
-    title: "Airtime Top-up",
-    amount: 1000,
-    category: "Data",
-    date: "2024-01-11",
-  },
-  {
-    id: "10",
-    title: "Dinner with Friends",
-    amount: 8000,
-    category: "Food",
-    date: "2024-01-09",
-  },
-  {
-    id: "11",
-    title: "Keke NAPEP",
-    amount: 300,
-    category: "Transport",
-    date: "2024-01-08",
-  },
-  {
-    id: "12",
-    title: "Textbooks",
-    amount: 5000,
-    category: "School Fees",
-    date: "2024-01-07",
-  },
 ];
 
 export default function HistoryScreen() {
@@ -222,8 +119,8 @@ export default function HistoryScreen() {
                 {filteredTransactions.length !== 1 ? "s" : ""}
               </Text>
             </View>
-            <View className="w-12 h-12 bg-primary/10 rounded-full items-center justify-center">
-              <TrendingUp size={24} className="text-primary" />
+            <View className="w-10 h-10 bg-primary/10 rounded-full items-center justify-center">
+              <TrendingUp size={20} color="#DC2626" />
             </View>
           </View>
         </View>
@@ -239,8 +136,7 @@ export default function HistoryScreen() {
                 onPress={clearFilters}
                 className="flex-row items-center"
               >
-                <X size={16} className="text-primary mr-1" />
-                <Text className="text-sm text-primary font-medium">
+                <Text className="text-xs text-primary font-medium">
                   Clear All
                 </Text>
               </TouchableOpacity>
@@ -258,7 +154,7 @@ export default function HistoryScreen() {
                 onPress={() => setSelectedCategory(cat)}
                 className={`px-4 py-2 rounded-full border ${
                   selectedCategory === cat
-                    ? "bg-primary border-primary"
+                    ? "bg-emerald-500 border-emerald-300"
                     : "bg-card border-border"
                 }`}
               >
