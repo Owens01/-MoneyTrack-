@@ -1,3 +1,5 @@
+import { Transaction } from "@/base/interface/transcation";
+import { recentTransactions } from "@/components/constants/homeMockData";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   AlertTriangle,
@@ -17,16 +19,6 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-// Mock Data Types
-type Transaction = {
-  id: string;
-  title: string;
-  amount: number;
-  category: string;
-  date: string;
-  type: "expense" | "income";
-};
-
 export default function DashboardScreen() {
   // Mock Data
   const budgetLimit = 100000;
@@ -35,59 +27,16 @@ export default function DashboardScreen() {
   const percentageUsed = (totalSpent / budgetLimit) * 100;
   const isWarning = percentageUsed >= 80;
 
-  const recentTransactions: Transaction[] = [
-    {
-      id: "1",
-      title: "Grocery Shopping",
-      amount: 15000,
-      category: "Food",
-      date: "Today",
-      type: "expense",
-    },
-    {
-      id: "2",
-      title: "Uber Ride",
-      amount: 3500,
-      category: "Transport",
-      date: "Today",
-      type: "expense",
-    },
-    {
-      id: "3",
-      title: "Data Subscription",
-      amount: 2000,
-      category: "Data",
-      date: "Yesterday",
-      type: "expense",
-    },
-    {
-      id: "4",
-      title: "Freelance Payment",
-      amount: 45000,
-      category: "Income",
-      date: "Yesterday",
-      type: "income",
-    },
-    {
-      id: "5",
-      title: "Lunch",
-      amount: 2500,
-      category: "Food",
-      date: "2 days ago",
-      type: "expense",
-    },
-  ];
-
   const renderTransaction = ({ item }: { item: Transaction }) => (
-    <View className="flex-row items-center justify-between p-4 mb-3 bg-card rounded-xl border border-border">
+    <View className="flex-row items-center justify-between p-4 mb-3 rounded-xl bg-card border border-border">
       <View className="flex-row items-center gap-3">
         <View
           className={`p-2.5 rounded-full ${item.type === "expense" ? "bg-red-50 dark:bg-red-900/20" : "bg-emerald-50 dark:bg-emerald-900/20"}`}
         >
           {item.type === "expense" ? (
-            <ArrowUpRight size={20} className="text-red-500" />
+            <ArrowUpRight size={20} color="#fb2c36" />
           ) : (
-            <ArrowDownRight size={20} className="text-emerald-500" />
+            <ArrowDownRight size={20} color="#10b981" />
           )}
         </View>
         <View>
@@ -108,11 +57,8 @@ export default function DashboardScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 100 }}
-        showsVerticalScrollIndicator={false}
-      >
+    <SafeAreaView className="flex-1">
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View className="flex-row items-center justify-end px-6 pt-4 pb-2">
           <View>
@@ -124,7 +70,7 @@ export default function DashboardScreen() {
         {/* Budget Card */}
         <View className="px-6 mt-4">
           <LinearGradient
-            colors={isWarning ? ["#dc2626", "#ef4444"] : ["#059669", "#10b9"]}
+            colors={isWarning ? ["#dc2626", "#ef4444"] : ["#059669", "#10b981"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={{ borderRadius: 20, padding: 24 }}
@@ -173,7 +119,7 @@ export default function DashboardScreen() {
               <View className="flex-row items-center gap-2 mt-3 bg-white/10 p-2 rounded-lg">
                 <AlertTriangle size={16} color="white" />
                 <Text className="text-white text-xs font-medium">
-                  You've used 80% of your budget
+                  You&lsquo;ve used 80% of your budget
                 </Text>
               </View>
             )}
@@ -184,7 +130,7 @@ export default function DashboardScreen() {
         <View className="flex-row px-6 mt-6 gap-4">
           <View className="flex-1 bg-card p-4 rounded-xl border border-border">
             <View className="flex-row items-center gap-2 mb-2">
-              <TrendingUp size={18} className="text-emerald-500" />
+              <TrendingUp size={18} color="#10b981" />
               <Text className="text-xs text-muted-foreground">This Month</Text>
             </View>
             <Text className="text-lg font-bold text-foreground">
@@ -196,7 +142,7 @@ export default function DashboardScreen() {
           </View>
           <View className="flex-1 bg-card p-4 rounded-xl border border-border">
             <View className="flex-row items-center gap-2 mb-2">
-              <Wallet size={18} className="text-blue-500" />
+              <Wallet size={18} color="#3B82F6" />
               <Text className="text-xs text-muted-foreground">Savings</Text>
             </View>
             <Text className="text-lg font-bold text-foreground">
@@ -229,7 +175,7 @@ export default function DashboardScreen() {
       </ScrollView>
 
       {/* Floating Action Button */}
-      <TouchableOpacity className="absolute bottom-24 right-6 bg-emerald-500 p-4 rounded-full shadow-lg shadow-emerald-500/30 items-center justify-center">
+      <TouchableOpacity className="absolute bottom-10 right-3 bg-emerald-500 p-4 rounded-full shadow-lg shadow-emerald-500/30 items-center justify-center">
         <Plus size={24} color="white" strokeWidth={2.5} />
       </TouchableOpacity>
     </SafeAreaView>

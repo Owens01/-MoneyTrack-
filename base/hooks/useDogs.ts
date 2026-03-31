@@ -7,3 +7,10 @@ export const useGetDogs = () => {
     queryFn: fetchDogs,
   });
 };
+
+async function name() {
+  const data = await fetchDogs();
+  console.log(data);
+}
+
+name();

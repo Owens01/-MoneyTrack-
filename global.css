@@ -2,7 +2,6 @@
 @import "uniwind";
 
 @theme {
-
   /* Base sans */
   --font-sans: "InterTight-Regular";
 
@@ -26,60 +25,63 @@
   --font-sans-bold-italic: "InterTight-BoldItalic";
   --font-sans-extrabold-italic: "InterTight-ExtraBoldItalic";
   --font-sans-black-italic: "InterTight-BlackItalic";
-}
 
-:root {
-  --radius: 12;
+  /* Colors */
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
 
-  --background: 255 255 255;
-  --foreground: 15 23 42;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
 
-  --card: 255 255 255;
-  --card-foreground: 15 23 42;
+  --color-primary: #dc2626;
+  --color-primary-foreground: #ffffff;
 
-  --primary: 16 185 129;
-  --primary-foreground: 255 255 255;
+  --color-secondary: #fff1f1;
+  --color-secondary-foreground: #0f172a;
 
-  --secondary: 240 249 255;
-  --secondary-foreground: 15 23 42;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
 
-  --muted: 241 245 249;
-  --muted-foreground: 100 116 139;
+  --color-accent: #dc2626;
+  --color-accent-foreground: #ffffff;
 
-  --accent: 16 185 129;
-  --accent-foreground: 255 255 255;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
 
-  --destructive: 220 38 38;
-  --destructive-foreground: 255 255 255;
+  --color-border: #e2e8f0;
+  --color-input: #f1f5f9;
+  --color-ring: #dc2626;
 
-  --border: 226 232 240;
-  --input: 241 245 249;
-  --ring: 16 185 129;
+  --radius-xl: 12px;
+
+  --color-blue-500: #3b82f6;
 }
 
 .dark {
-  --background: 15 23 42;
-  --foreground: 248 250 252;
+  --color-background: #0f172a;
+  --color-foreground: #f8fafc;
 
-  --card: 30 41 59;
-  --card-foreground: 248 250 252;
+  --color-card: #1e293b;
+  --color-card-foreground: #f8fafc;
 
-  --primary: 52 211 153;
-  --primary-foreground: 15 23 42;
+  --color-primary: #ef4444;
+  --color-primary-foreground: #0f172a;
 
-  --secondary: 30 41 59;
-  --secondary-foreground: 248 250 252;
+  --color-secondary: #1e293b;
+  --color-secondary-foreground: #f8fafc;
 
-  --muted: 51 65 85;
-  --muted-foreground: 148 163 184;
+  --color-muted: #334155;
+  --color-muted-foreground: #94a3b8;
 
-  --accent: 52 211 153;
-  --accent-foreground: 15 23 42;
+  --color-accent: #ef4444;
+  --color-accent-foreground: #0f172a;
 
-  --destructive: 248 113 113;
-  --destructive-foreground: 15 23 42;
+  --color-destructive: #f87171;
+  --color-destructive-foreground: #0f172a;
 
-  --border: 51 65 85;
-  --input: 51 65 85;
-  --ring: 52 211 153;
+  --color-border: #334155;
+  --color-input: #334155;
+  --color-ring: #ef4444;
+
+  --color-blue-500: #3b82f6;
 }
