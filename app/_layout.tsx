@@ -3,6 +3,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ScreenWrapper from "@/components/global/ScreenWrapper";
+import { toastConfig } from "@/components/ui/toast/CustomToast";
+import Toast from "react-native-toast-message";
 import "@/global.css";
 
 const queryClient = new QueryClient();
@@ -19,6 +21,7 @@ export default function RootLayout() {
           </ScreenWrapper>
         </SafeAreaProvider>
       </GestureHandlerRootView>
+      <Toast config={toastConfig} />
     </QueryClientProvider>
   );
 }

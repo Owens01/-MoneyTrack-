@@ -174,7 +174,7 @@ export default function DashboardScreen() {
         </View>
       </ScrollView>
 
-      {/* Floating Action Button */}
+      {/* Button */}
       <TouchableOpacity className="absolute bottom-10 right-3 bg-emerald-500 p-4 rounded-full shadow-lg shadow-emerald-500/30 items-center justify-center">
         <Plus size={24} color="white" strokeWidth={2.5} />
       </TouchableOpacity>

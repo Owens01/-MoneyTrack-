@@ -24,6 +24,14 @@ export const lightTheme = {
   border: "#E2E8F0",
   input: "#F1F5F9",
   ring: "#DC2626",
+
+  // Toast colors
+  vibrantGreen: "#16A34A",
+  mintCream: "#F0FDF4",
+  paleRed: "#FEF2F2",
+  black: "#000000",
+  black900: "#0F172A",
+  black600: "#475569",
 };
 
 export const darkTheme = {
@@ -52,4 +60,12 @@ export const darkTheme = {
   border: "#334155",
   input: "#334155",
   ring: "#EF4444",
+
+  // Toast colors
+  vibrantGreen: "#22C55E",
+  mintCream: "#052E16",
+  paleRed: "#450A0A",
+  black: "#000000",
+  black900: "#F8FAFC",
+  black600: "#94A3B8",
 };
