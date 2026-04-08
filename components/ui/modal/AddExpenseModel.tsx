@@ -1,7 +1,7 @@
+import React, { useState } from "react";
 import { AddExpenseModalProps, CategoryType } from "@/base/interface/category";
 import { CustomModal } from "@/components/common/Custommodal";
 import { Calendar, Save } from "lucide-react-native";
-import React, { useState } from "react";
 import {
   Alert,
   ScrollView,
@@ -9,8 +9,10 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import { magicModal } from "react-native-magic-modal";
+import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 
 const CATEGORIES: CategoryType[] = [
   "Food",
@@ -27,6 +29,8 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState<CategoryType>("Food");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
+  const [dateValue, setDateValue] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisible] = useState(false);
 
   const handleSave = () => {
     if (!title.trim()) {
@@ -45,15 +49,16 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
     setAmount("");
     setCategory("Food");
     setDate(new Date().toISOString().split("T")[0]);
+    setDateValue(new Date());
     magicModal.hide();
   };
 
   const footer = (
     <TouchableOpacity
       onPress={handleSave}
-      className="bg-primary rounded-xl py-4 flex-row items-center justify-center"
+      className="bg-emerald-500 rounded-xl py-4 flex-row items-center justify-center gap-2"
     >
-      <Save size={20} className="text-primary-foreground mr-2" />
+      <Save size={20} className="text-primary-foreground" />
       <Text className="text-primary-foreground font-semibold text-base">
         Save Expense
       </Text>
@@ -62,10 +67,7 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
 
   return (
     <CustomModal title="Add Expense" footer={footer}>
-      <ScrollView
-        className="flex-1 px-6 py-4"
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView className="px-6 py-4" showsVerticalScrollIndicator={false}>
         {/* Title Field */}
         <View className="mb-6">
           <Text className="text-sm font-medium text-foreground mb-2">
@@ -114,7 +116,7 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
                 onPress={() => setCategory(cat)}
                 className={`px-4 py-2 rounded-full border ${
                   category === cat
-                    ? "bg-primary border-primary"
+                    ? "bg-emerald-500 border-emerald-300"
                     : "bg-input border-border"
                 }`}
               >
@@ -133,15 +135,41 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
         </View>
 
         {/* Date Field */}
-        <View className="mb-6">
+        <View className="mb-6 z-50">
           <Text className="text-sm font-medium text-foreground mb-2">Date</Text>
-          <TouchableOpacity className="bg-input border border-border rounded-xl px-4 py-3 flex-row items-center justify-between">
+          <TouchableOpacity 
+            onPress={() => setDatePickerVisible(!isDatePickerVisible)}
+            className="bg-input border border-border rounded-xl px-4 py-3 flex-row items-center justify-between"
+          >
             <View className="flex-row items-center">
               <Calendar size={20} className="text-muted-foreground mr-3" />
               <Text className="text-foreground">{date}</Text>
             </View>
             <Text className="text-muted-foreground text-sm">Tap to change</Text>
           </TouchableOpacity>
+
+          {isDatePickerVisible && (
+            <DateTimePicker
+              value={dateValue}
+              mode="date"
+              display="default"
+              onChange={(event: DateTimePickerEvent, selectedDate?: Date) => {
+                if (Platform.OS === 'android') {
+                  setDatePickerVisible(false);
+                }
+                
+                if (event.type === "set" && selectedDate) {
+                  setDateValue(selectedDate);
+                  setDate(selectedDate.toISOString().split("T")[0]);
+                  if (Platform.OS === 'ios') {
+                    setDatePickerVisible(false);
+                  }
+                } else if (event.type === "dismissed") {
+                  setDatePickerVisible(false);
+                }
+              }}
+            />
+          )}
         </View>
       </ScrollView>
     </CustomModal>

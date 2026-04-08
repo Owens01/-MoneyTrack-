@@ -104,7 +104,7 @@ export default function HistoryScreen() {
       </View>
 
       <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 128 }}
+        contentContainerStyle={{ paddingHorizontal: 24 }}
       >
         {/* Summary Card */}
         <View className="bg-card rounded-2xl p-5 mb-6 border border-border">

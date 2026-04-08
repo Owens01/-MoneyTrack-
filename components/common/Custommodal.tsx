@@ -8,7 +8,6 @@ import {
   View,
 } from "react-native";
 import { magicModal } from "react-native-magic-modal";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 interface CustomModalProps {
   title: string;
@@ -17,16 +16,6 @@ interface CustomModalProps {
   onClose?: () => void;
 }
 
-/**
- * A reusable bottom-sheet style modal built on react-native-magic-modal.
- *
- * Usage:
- *   magicModal.show(() => (
- *     <CustomModal title="My Modal" onClose={() => magicModal.hide()}>
- *       {content}
- *     </CustomModal>
- *   ));
- */
 export function CustomModal({
   title,
   children,
@@ -41,16 +30,21 @@ export function CustomModal({
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      className="flex-1"
+      className="flex-1 justify-center items-center px-4"
     >
-      {/* Dim backdrop — tapping closes the modal */}
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={handleClose}
-        className="flex-1 bg-black/50"
-      />
+      {/* backdrop*/}
+      <View
+        style={{ position: "absolute", top: 0, bottom: 0, left: 0, right: 0 }}
+        className="bg-black/50"
+      >
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={handleClose}
+          className="flex-1"
+        />
+      </View>
 
-      <SafeAreaView className="bg-background rounded-t-3xl max-h-[90%]">
+      <View className="bg-background rounded-3xl w-full max-h-[85%] shrink overflow-hidden">
         {/* Header */}
         <View className="flex-row items-center justify-between px-6 py-4 border-b border-border">
           <Text className="text-xl font-bold text-foreground">{title}</Text>
@@ -59,14 +53,12 @@ export function CustomModal({
           </TouchableOpacity>
         </View>
 
-        {/* Body */}
         {children}
 
-        {/* Optional Footer */}
         {footer && (
           <View className="px-6 py-4 border-t border-border">{footer}</View>
         )}
-      </SafeAreaView>
+      </View>
     </KeyboardAvoidingView>
   );
 }
