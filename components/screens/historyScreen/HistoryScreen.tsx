@@ -1,4 +1,4 @@
-import { CategoryType, Transaction } from "@/base/interface/history";
+import { CategoryType } from "@/base/interface/history";
 import { Calendar, Filter, TrendingUp } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import {
@@ -10,7 +10,8 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { MOCK_TRANSACTIONS } from "./mockData";
+import { useTransactionStore } from "@/base/store/transactionStore";
+import { Transaction } from "@/base/interface/transcation";
 
 const CATEGORIES: (CategoryType | "All")[] = [
   "All",
@@ -24,15 +25,16 @@ const CATEGORIES: (CategoryType | "All")[] = [
 ];
 
 export default function HistoryScreen() {
+  const { transactions } = useTransactionStore();
   const [selectedCategory, setSelectedCategory] = useState<
-    CategoryType | "All"
+    any | "All"
   >("All");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
   // Filter logic
   const filteredTransactions = useMemo(() => {
-    return MOCK_TRANSACTIONS.filter((item) => {
+    return transactions.filter((item) => {
       // Category filter
       const categoryMatch =
         selectedCategory === "All" || item.category === selectedCategory;
@@ -49,7 +51,7 @@ export default function HistoryScreen() {
 
       return categoryMatch && dateMatch;
     }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [selectedCategory, startDate, endDate]);
+  }, [selectedCategory, startDate, endDate, transactions]);
 
   const totalSpent = filteredTransactions.reduce(
     (sum, item) => sum + item.amount,
@@ -230,7 +232,7 @@ export default function HistoryScreen() {
           ) : (
             <FlatList
               data={filteredTransactions}
-              renderItem={renderTransactionItem}
+              renderItem={renderTransactionItem as any}
               keyExtractor={(item) => item.id}
               scrollEnabled={false}
               contentContainerStyle={{ paddingBottom: 16 }}

@@ -1,14 +1,6 @@
-import { Transaction } from "@/base/interface/transcation";
-import { recentTransactions } from "@/components/constants/homeMockData";
+import { AddExpenseModal } from "@/components/ui/modal/AddExpenseModel";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  AlertTriangle,
-  ArrowDownRight,
-  ArrowUpRight,
-  Plus,
-  TrendingUp,
-  Wallet,
-} from "lucide-react-native";
+import { AlertTriangle, Plus, TrendingUp, Wallet } from "lucide-react-native";
 import React from "react";
 import {
   FlatList,
@@ -18,43 +10,38 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { magicModal } from "react-native-magic-modal";
+import { useTransactionStore } from "@/base/store/transactionStore";
+import { renderTransaction } from "./renderTransaction";
 
 export default function DashboardScreen() {
-  // Mock Data
+  const { transactions, addTransaction } = useTransactionStore();
+
+  // Calculate totals from store data
   const budgetLimit = 100000;
-  const totalSpent = 75000;
+  const totalSpent = transactions
+    .filter((t) => t.type === "expense")
+    .reduce((acc, current) => acc + current.amount, 0);
   const remaining = budgetLimit - totalSpent;
   const percentageUsed = (totalSpent / budgetLimit) * 100;
   const isWarning = percentageUsed >= 80;
 
-  const renderTransaction = ({ item }: { item: Transaction }) => (
-    <View className="flex-row items-center justify-between p-4 mb-3 rounded-xl bg-card border border-border">
-      <View className="flex-row items-center gap-3">
-        <View
-          className={`p-2.5 rounded-full ${item.type === "expense" ? "bg-red-50 dark:bg-red-900/20" : "bg-emerald-50 dark:bg-emerald-900/20"}`}
-        >
-          {item.type === "expense" ? (
-            <ArrowUpRight size={20} color="#fb2c36" />
-          ) : (
-            <ArrowDownRight size={20} color="#10b981" />
-          )}
-        </View>
-        <View>
-          <Text className="font-semibold text-foreground text-base">
-            {item.title}
-          </Text>
-          <Text className="text-xs text-muted-foreground">
-            {item.category} • {item.date}
-          </Text>
-        </View>
-      </View>
-      <Text
-        className={`font-bold ${item.type === "expense" ? "text-foreground" : "text-emerald-600 dark:text-emerald-400"}`}
-      >
-        {item.type === "expense" ? "-" : "+"}₦{item.amount.toLocaleString()}
-      </Text>
-    </View>
-  );
+  const handleAddExpense = () => {
+    magicModal.show(() => (
+      <AddExpenseModal
+        onSave={(expense) => {
+          addTransaction({
+            title: expense.title,
+            amount: parseFloat(expense.amount),
+            category: expense.category,
+            date: expense.date,
+            type: "expense",
+          });
+          magicModal.hide();
+        }}
+      />
+    ));
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-background">
@@ -137,7 +124,8 @@ export default function DashboardScreen() {
               ₦{totalSpent.toLocaleString()}
             </Text>
             <Text className="text-xs text-muted-foreground mt-1">
-              12 Transactions
+              {transactions.filter((t) => t.type === "expense").length}{" "}
+              Transactions
             </Text>
           </View>
           <View className="flex-1 bg-card p-4 rounded-xl border border-border">
@@ -166,7 +154,7 @@ export default function DashboardScreen() {
           </View>
 
           <FlatList
-            data={recentTransactions}
+            data={transactions.slice(0, 5)} // Show only recent 5
             renderItem={renderTransaction}
             keyExtractor={(item) => item.id}
             scrollEnabled={false}
@@ -175,7 +163,10 @@ export default function DashboardScreen() {
       </ScrollView>
 
       {/* Button */}
-      <TouchableOpacity className="absolute bottom-10 right-3 bg-emerald-500 p-4 rounded-full shadow-lg shadow-emerald-500/30 items-center justify-center">
+      <TouchableOpacity
+        onPress={handleAddExpense}
+        className="absolute bottom-10 right-3 bg-emerald-500 p-4 rounded-full shadow-lg shadow-emerald-500/30 items-center justify-center"
+      >
         <Plus size={24} color="white" strokeWidth={2.5} />
       </TouchableOpacity>
     </SafeAreaView>
