@@ -1,3 +1,5 @@
+import { ErrorToast, SuccessToast } from "@/base/libs/toast";
+import { useAuthStore } from "@/base/store/authStore";
 import {
   Check,
   ChevronRight,
@@ -15,11 +17,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import { ErrorToast, SuccessToast } from "@/base/libs/toast";
 
 export default function ProfileScreen() {
+  const { user, logout } = useAuthStore();
   const [budgetLimit, setBudgetLimit] = useState("100000");
   const [isEditingBudget, setIsEditingBudget] = useState(false);
   const [tempBudget, setTempBudget] = useState(budgetLimit);
@@ -41,21 +41,17 @@ export default function ProfileScreen() {
         text: "Log Out",
         style: "destructive",
         onPress: () => {
-          // In a real app, this would clear auth state
-          console.log("User logged out");
+          logout();
         },
       },
     ]);
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 100 }}
-        showsVerticalScrollIndicator={false}
-      >
+    <View className="flex-1 bg-background">
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="px-6 pt-4 pb-6">
+        <View className="px-6 mt-10 pb-6">
           <Text className="text-2xl font-bold text-foreground">Profile</Text>
         </View>
 
@@ -123,7 +119,7 @@ export default function ProfileScreen() {
                   <View className="flex-row gap-2">
                     <TouchableOpacity
                       onPress={handleSaveBudget}
-                      className="flex-1 bg-primary py-3 rounded-lg items-center"
+                      className="flex-1 bg-emerald-600 py-3 rounded-lg items-center"
                     >
                       <Text className="text-primary-foreground font-semibold">
                         Save
@@ -215,23 +211,16 @@ export default function ProfileScreen() {
         </View>
 
         {/* Logout Button */}
-        <View className="px-6 mt-4">
+        <View className="px-6 my-4">
           <TouchableOpacity
             onPress={handleLogout}
             className="bg-destructive/10 border border-destructive/20 p-4 rounded-xl flex-row items-center justify-center gap-2"
           >
-            <LogOut size={20} className="text-destructive" />
+            <LogOut size={20} color="#DC2626" />
             <Text className="font-semibold text-destructive">Log Out</Text>
           </TouchableOpacity>
         </View>
-
-        {/* Version Info */}
-        <View className="items-center mt-8 mb-4">
-          <Text className="text-xs text-muted-foreground">
-            MoneyTrack v1.0.0
-          </Text>
-        </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }

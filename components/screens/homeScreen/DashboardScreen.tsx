@@ -48,10 +48,10 @@ export default function DashboardScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <View className="flex-1 bg-background">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
-        <View className="flex-row items-center justify-end px-6 pt-4 pb-2">
+        <View className="flex-row items-center justify-end px-6 mt-10 pb-2">
           <View>
             <Text className="text-muted-foreground text-sm">Welcome back,</Text>
             <Text className="text-xl font-bold text-foreground">Chinedu</Text>
@@ -158,7 +158,7 @@ export default function DashboardScreen() {
           </View>
 
           <FlatList
-            data={transactions.slice(0, 5)} // Show only recent 5
+            data={transactions.slice(0, 5)}
             renderItem={renderTransaction}
             keyExtractor={(item) => item.id}
             scrollEnabled={false}
@@ -173,6 +173,6 @@ export default function DashboardScreen() {
       >
         <Plus size={24} color="white" strokeWidth={2.5} />
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 }

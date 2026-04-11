@@ -1,5 +1,5 @@
 import { AddExpenseModalProps, CategoryType } from "@/base/interface/category";
-import { CustomModal } from "@/components/common/Custommodal";
+import { CustomModal } from "@/components/common/CustomModal";
 import { Calendar, Save } from "lucide-react-native";
 import React, { useState } from "react";
 import {
