@@ -13,9 +13,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { magicModal } from "react-native-magic-modal";
 import { useTransactionStore } from "@/base/store/transactionStore";
 import { renderTransaction } from "./renderTransaction";
+import { useRouter } from "expo-router";
 
 export default function DashboardScreen() {
   const { transactions, addTransaction } = useTransactionStore();
+  const router = useRouter();
 
   // Calculate totals from store data
   const budgetLimit = 100000;
@@ -146,7 +148,7 @@ export default function DashboardScreen() {
             <Text className="text-lg font-bold text-foreground">
               Recent Transactions
             </Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => router.push("/history")} >
               <Text className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">
                 See All
               </Text>
