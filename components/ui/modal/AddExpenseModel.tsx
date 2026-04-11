@@ -55,7 +55,9 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
     setAmount("");
     setCategory("Food");
     setDate(new Date().toISOString().split("T")[0]);
-    magicModal.hide();
+    magicModal.hide(
+      "add-expense-modal"
+    );
   };
 
   const footer = (

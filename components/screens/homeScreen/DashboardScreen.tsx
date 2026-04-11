@@ -39,7 +39,9 @@ export default function DashboardScreen() {
             date: expense.date,
             type: "expense",
           });
-          magicModal.hide();
+          magicModal.hide(
+            "add-expense-modal"
+          );
         }}
       />
     ));
