@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import { AddExpenseModalProps, CategoryType } from "@/base/interface/category";
 import { CustomModal } from "@/components/common/Custommodal";
 import { Calendar, Save } from "lucide-react-native";
+import React, { useState } from "react";
 import {
   Alert,
   ScrollView,
@@ -9,10 +9,9 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Platform,
 } from "react-native";
+import DatePicker from "react-native-date-picker";
 import { magicModal } from "react-native-magic-modal";
-import DateTimePicker, { DateTimePickerEvent } from "@react-native-community/datetimepicker";
 
 const CATEGORIES: CategoryType[] = [
   "Food",
@@ -137,7 +136,7 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
         {/* Date Field */}
         <View className="mb-6 z-50">
           <Text className="text-sm font-medium text-foreground mb-2">Date</Text>
-          <TouchableOpacity 
+          <TouchableOpacity
             onPress={() => setDatePickerVisible(!isDatePickerVisible)}
             className="bg-input border border-border rounded-xl px-4 py-3 flex-row items-center justify-between"
           >
@@ -148,28 +147,19 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
             <Text className="text-muted-foreground text-sm">Tap to change</Text>
           </TouchableOpacity>
 
-          {isDatePickerVisible && (
-            <DateTimePicker
-              value={dateValue}
-              mode="date"
-              display="default"
-              onChange={(event: DateTimePickerEvent, selectedDate?: Date) => {
-                if (Platform.OS === 'android') {
-                  setDatePickerVisible(false);
-                }
-                
-                if (event.type === "set" && selectedDate) {
-                  setDateValue(selectedDate);
-                  setDate(selectedDate.toISOString().split("T")[0]);
-                  if (Platform.OS === 'ios') {
-                    setDatePickerVisible(false);
-                  }
-                } else if (event.type === "dismissed") {
-                  setDatePickerVisible(false);
-                }
-              }}
-            />
-          )}
+          <DatePicker
+            modal
+            open={isDatePickerVisible}
+            date={dateValue}
+            onConfirm={(date) => {
+              setDateValue(date);
+              setDate(date.toISOString().split("T")[0]);
+              setDatePickerVisible(false);
+            }}
+            onCancel={() => {
+              setDatePickerVisible(false);
+            }}
+          />
         </View>
       </ScrollView>
     </CustomModal>
