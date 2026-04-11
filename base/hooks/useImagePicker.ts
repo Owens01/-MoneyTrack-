@@ -1,15 +1,16 @@
-import { Alert } from "react-native";
+import { ErrorToast } from "@/base/libs/toast";
 import {
   Asset,
+  CameraOptions,
+  ImageLibraryOptions,
   launchCamera,
   launchImageLibrary,
 } from "react-native-image-picker";
-import toast from "@/components/ui/toast/CustomToast";
 
 type PickerResponse = Asset | null;
 
-const options = {
-  mediaType: "photo" as const,
+const options: ImageLibraryOptions & CameraOptions = {
+  mediaType: "photo",
   quality: 0.8,
   includeBase64: false,
 };
@@ -22,13 +23,13 @@ export const useImagePicker = () => {
       if (result.didCancel) return null;
 
       if (result.errorCode) {
-        toast.error("Error", result.errorMessage || "Something went wrong");
+        ErrorToast("Error", result.errorMessage || "Something went wrong");
         return null;
       }
 
       return result.assets?.[0] || null;
     } catch (error) {
-      toast.error("Error", "Failed to open gallery");
+      ErrorToast("Error", "Failed to open gallery");
       return null;
     }
   };
@@ -40,13 +41,13 @@ export const useImagePicker = () => {
       if (result.didCancel) return null;
 
       if (result.errorCode) {
-        toast.error("Error", result.errorMessage || "Camera error");
+        ErrorToast("Error", result.errorMessage || "Camera error");
         return null;
       }
 
       return result.assets?.[0] || null;
     } catch (error) {
-      toast.error("Error", "Failed to open camera");
+      ErrorToast("Error", "Failed to open camera");
       return null;
     }
   };

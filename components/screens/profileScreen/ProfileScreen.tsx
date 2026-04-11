@@ -5,7 +5,6 @@ import {
   ChevronRight,
   Edit2,
   LogOut,
-  User,
   Wallet,
 } from "lucide-react-native";
 import React, { useState } from "react";
@@ -17,10 +16,11 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { EditImage } from "./components/EditImage";
 
 export default function ProfileScreen() {
   const { user, logout } = useAuthStore();
-  const [budgetLimit, setBudgetLimit] = useState("100000");
+  const [budgetLimit, setBudgetLimit] = useState("");
   const [isEditingBudget, setIsEditingBudget] = useState(false);
   const [tempBudget, setTempBudget] = useState(budgetLimit);
 
@@ -58,12 +58,7 @@ export default function ProfileScreen() {
         {/* Profile Info Card */}
         <View className="px-6 mb-6">
           <View className="bg-card rounded-2xl p-6 border border-border items-center">
-            <View className="w-24 h-24 rounded-full bg-emerald-100 dark:bg-emerald-900/30 items-center justify-center mb-4 border-4 border-emerald-500/20">
-              <User
-                size={40}
-                className="text-emerald-600 dark:text-emerald-400"
-              />
-            </View>
+            <EditImage />
             <Text className="text-xl font-bold text-foreground mb-1">
               Chinedu Okonkwo
             </Text>
