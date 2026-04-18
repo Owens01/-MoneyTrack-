@@ -1,10 +1,9 @@
-import { AddExpenseModalProps, CategoryType } from "@/base/interface/category";
+import { AddExpenseModalProps } from "@/base/interface/category";
 import CategorySelector from "@/components/global/category/Category";
 import { CustomSheet } from "@/components/global/sheet/CustomModal";
 import { Calendar, Save } from "lucide-react-native";
 import React, { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import {
-  Alert,
   ScrollView,
   Text,
   TextInput,
@@ -12,16 +11,8 @@ import {
   View,
 } from "react-native";
 import { ActionSheetRef } from "react-native-actions-sheet";
-
-const CATEGORIES: CategoryType[] = [
-  "Food",
-  "Transport",
-  "Data",
-  "Rent",
-  "School Fees",
-  "Shopping",
-  "Other",
-];
+import { CATEGORIES } from "@/base/utils/expenses/utils";
+import { SuccessToast, ErrorToast } from "@/base/libs/toast";
 
 export const AddExpenseModal = forwardRef<ActionSheetRef, AddExpenseModalProps>(
   ({ onSave }, ref) => {
@@ -32,7 +23,6 @@ export const AddExpenseModal = forwardRef<ActionSheetRef, AddExpenseModalProps>(
 
     const sheetRef = useRef<ActionSheetRef>(null);
 
-    // Expose the sheet's show/hide methods to the parent via the provided ref
     useImperativeHandle(ref, () => ({
       show: () => sheetRef.current?.show(),
       hide: () => sheetRef.current?.hide(),
@@ -40,15 +30,15 @@ export const AddExpenseModal = forwardRef<ActionSheetRef, AddExpenseModalProps>(
 
     const handleSave = () => {
       if (!title.trim()) {
-        Alert.alert("Error", "Please enter a title");
+        ErrorToast("Error", "Please enter a title");
         return;
       }
       if (!amount.trim()) {
-        Alert.alert("Error", "Please enter an amount");
+        ErrorToast("Error", "Please enter an amount");
         return;
       }
       if (!date.trim() || date.length !== 10) {
-        Alert.alert("Error", "Please enter a valid format (YYYY-MM-DD)");
+        ErrorToast("Error", "Please enter a valid format (YYYY-MM-DD)");
         return;
       }
 
@@ -58,6 +48,8 @@ export const AddExpenseModal = forwardRef<ActionSheetRef, AddExpenseModalProps>(
         category,
         date: date.trim(),
       });
+
+      SuccessToast("Expense Added", "Your expense has been saved successfully.");
 
       // Reset form & close the sheet
       setTitle("");
