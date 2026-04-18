@@ -2,7 +2,7 @@ import { storage } from "@/base/libs/mmkvStore";
 import { ErrorToast } from "@/base/libs/toast";
 import { signInSchema } from "@/base/libs/validation/auth.schema";
 import { useAuthStore } from "@/base/store/authStore";
-import ScreenWrapper from "@/components/global/ScreenWrapper";
+import ScreenWrapper from "@/components/global/wrapper/ScreenWrapper";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useRouter } from "expo-router";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react-native";
