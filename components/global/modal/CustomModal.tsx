@@ -1,27 +1,8 @@
+import { CustomModalProps, ModalButton } from "@/base/interface/model";
 import { X } from "lucide-react-native";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { magicModal } from "react-native-magic-modal";
-
-interface ModalButton {
-  label: string;
-  onPress: () => void;
-  variant?: "primary" | "secondary" | "danger";
-}
-
-interface CustomModalProps {
-  modalId: string;
-  title: string;
-  description?: string;
-  children?: React.ReactNode;
-  buttons?: ModalButton[];
-  onClose?: () => void;
-  closeOnBackdrop?: boolean;
-  cardClassName?: string;
-  titleClassName?: string;
-  descriptionClassName?: string;
-  bodyClassName?: string;
-}
 
 const BUTTON_CLASSES: Record<
   NonNullable<ModalButton["variant"]>,

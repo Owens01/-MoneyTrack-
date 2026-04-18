@@ -1,7 +1,17 @@
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import { Home, List, User } from "lucide-react-native";
+import { useEffect } from "react";
+import { useAuthStore } from "@/base/store/authStore";
 
 export default function TabsLayout() {
+  const { user, hydrated } = useAuthStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (hydrated && !user) {
+      router.replace("/");
+    }
+  }, [user, hydrated, router]);
   return (
     <Tabs
       screenOptions={{
