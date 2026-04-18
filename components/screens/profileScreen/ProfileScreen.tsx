@@ -9,7 +9,6 @@ import {
 } from "lucide-react-native";
 import React, { useState } from "react";
 import {
-  Alert,
   ScrollView,
   Text,
   TextInput,
@@ -17,9 +16,11 @@ import {
   View,
 } from "react-native";
 import { EditImage } from "./components/EditImage";
+import { magicModal } from "react-native-magic-modal";
+import { ConfirmLogout } from "../../global/ui/modal/ConfirmLogout";
 
 export default function ProfileScreen() {
-  const { user, logout } = useAuthStore();
+  useAuthStore();
   const [budgetLimit, setBudgetLimit] = useState("");
   const [isEditingBudget, setIsEditingBudget] = useState(false);
   const [tempBudget, setTempBudget] = useState(budgetLimit);
@@ -35,16 +36,8 @@ export default function ProfileScreen() {
   };
 
   const handleLogout = () => {
-    Alert.alert("Log Out", "Are you sure you want to log out?", [
-      { text: "Cancel", style: "cancel" },
-      {
-        text: "Log Out",
-        style: "destructive",
-        onPress: () => {
-          logout();
-        },
-      },
-    ]);
+    const modalId = "logout-modal";
+    magicModal.show(() => <ConfirmLogout modalId={modalId} />);
   };
 
   return (

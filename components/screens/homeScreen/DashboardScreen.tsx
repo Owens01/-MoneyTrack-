@@ -1,4 +1,4 @@
-import { AddExpenseModal } from "@/components/global/ui/modal/AddExpenseModel";
+import { AddExpenseModal } from "@/components/global/ui/sheet/AddExpenseModel";
 import { LinearGradient } from "expo-linear-gradient";
 import { AlertTriangle, Plus, TrendingUp, Wallet } from "lucide-react-native";
 import React, { useRef } from "react";
