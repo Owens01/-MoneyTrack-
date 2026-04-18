@@ -1,7 +1,7 @@
 import { AddExpenseModal } from "@/components/global/ui/modal/AddExpenseModel";
 import { LinearGradient } from "expo-linear-gradient";
 import { AlertTriangle, Plus, TrendingUp, Wallet } from "lucide-react-native";
-import React from "react";
+import React, { useRef } from "react";
 import {
   FlatList,
   ScrollView,
@@ -9,15 +9,15 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { magicModal } from "react-native-magic-modal";
 import { useTransactionStore } from "@/base/store/transactionStore";
 import { renderTransaction } from "./renderTransaction";
 import { useRouter } from "expo-router";
+import { ActionSheetRef } from "react-native-actions-sheet";
 
 export default function DashboardScreen() {
   const { transactions, addTransaction } = useTransactionStore();
   const router = useRouter();
+  const addExpenseModalRef = useRef<ActionSheetRef>(null);
 
   // Calculate totals from store data
   const budgetLimit = 100000;
@@ -29,22 +29,17 @@ export default function DashboardScreen() {
   const isWarning = percentageUsed >= 80;
 
   const handleAddExpense = () => {
-    magicModal.show(() => (
-      <AddExpenseModal
-        onSave={(expense) => {
-          addTransaction({
-            title: expense.title,
-            amount: parseFloat(expense.amount),
-            category: expense.category,
-            date: expense.date,
-            type: "expense",
-          });
-          magicModal.hide(
-            "add-expense-modal"
-          );
-        }}
-      />
-    ));
+    addExpenseModalRef.current?.show();
+  };
+
+  const onSaveExpense = (expense: any) => {
+    addTransaction({
+      title: expense.title,
+      amount: parseFloat(expense.amount),
+      category: expense.category,
+      date: expense.date,
+      type: "expense",
+    });
   };
 
   return (
@@ -173,6 +168,8 @@ export default function DashboardScreen() {
       >
         <Plus size={24} color="white" strokeWidth={2.5} />
       </TouchableOpacity>
+
+      <AddExpenseModal ref={addExpenseModalRef} onSave={onSaveExpense} />
     </View>
   );
 }
