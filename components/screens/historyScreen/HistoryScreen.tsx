@@ -1,4 +1,6 @@
 import { CategoryType } from "@/base/interface/history";
+import { useTransactionStore } from "@/base/store/transactionStore";
+import CategorySelector from "@/components/global/category/Category";
 import { Calendar, Filter, TrendingUp } from "lucide-react-native";
 import React, { useMemo, useState } from "react";
 import {
@@ -10,8 +12,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTransactionStore } from "@/base/store/transactionStore";
-import { Transaction } from "@/base/interface/transcation";
+import { RenderTransactionItem } from "./TransactionItem";
 
 const CATEGORIES: (CategoryType | "All")[] = [
   "All",
@@ -26,31 +27,31 @@ const CATEGORIES: (CategoryType | "All")[] = [
 
 export default function HistoryScreen() {
   const { transactions } = useTransactionStore();
-  const [selectedCategory, setSelectedCategory] = useState<
-    any | "All"
-  >("All");
+  const [selectedCategory, setSelectedCategory] = useState<any | "All">("All");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
   // Filter logic
   const filteredTransactions = useMemo(() => {
-    return transactions.filter((item) => {
-      // Category filter
-      const categoryMatch =
-        selectedCategory === "All" || item.category === selectedCategory;
+    return transactions
+      .filter((item) => {
+        // Category filter
+        const categoryMatch =
+          selectedCategory === "All" || item.category === selectedCategory;
 
-      // Date filter
-      let dateMatch = true;
-      if (startDate && endDate) {
-        dateMatch = item.date >= startDate && item.date <= endDate;
-      } else if (startDate) {
-        dateMatch = item.date >= startDate;
-      } else if (endDate) {
-        dateMatch = item.date <= endDate;
-      }
+        // Date filter
+        let dateMatch = true;
+        if (startDate && endDate) {
+          dateMatch = item.date >= startDate && item.date <= endDate;
+        } else if (startDate) {
+          dateMatch = item.date >= startDate;
+        } else if (endDate) {
+          dateMatch = item.date <= endDate;
+        }
 
-      return categoryMatch && dateMatch;
-    }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        return categoryMatch && dateMatch;
+      })
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }, [selectedCategory, startDate, endDate, transactions]);
 
   const totalSpent = filteredTransactions.reduce(
@@ -64,35 +65,6 @@ export default function HistoryScreen() {
     setEndDate("");
   };
 
-  const renderTransactionItem = ({ item }: { item: Transaction }) => (
-    <View className="bg-card rounded-xl p-4 mb-3 border border-border flex-row items-center justify-between">
-      <View className="flex-1">
-        <View className="flex-row items-center gap-2 mb-1">
-          <Text className="text-xs text-muted-foreground font-medium">
-            {new Date(item.date).toLocaleDateString("en-NG", {
-              month: "short",
-              day: "numeric",
-            })}
-          </Text>
-          <View className="px-2 py-0.5 bg-muted rounded-full">
-            <Text className="text-xs text-muted-foreground">
-              {item.category}
-            </Text>
-          </View>
-        </View>
-        <Text
-          className="text-base font-semibold text-foreground"
-          numberOfLines={1}
-        >
-          {item.title}
-        </Text>
-      </View>
-      <Text className="text-lg font-bold text-foreground ml-4">
-        ₦{item.amount.toLocaleString()}
-      </Text>
-    </View>
-  );
-
   return (
     <SafeAreaView className="flex-1 bg-background">
       {/* Header */}
@@ -103,9 +75,7 @@ export default function HistoryScreen() {
         </Text>
       </View>
 
-      <ScrollView
-        contentContainerStyle={{ paddingHorizontal: 24 }}
-      >
+      <ScrollView className="px-3" showsVerticalScrollIndicator={false}>
         {/* Summary Card */}
         <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
           <View className="flex-row items-center justify-between">
@@ -145,33 +115,11 @@ export default function HistoryScreen() {
             )}
           </View>
 
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ gap: 8 }}
-          >
-            {CATEGORIES.map((cat) => (
-              <TouchableOpacity
-                key={cat}
-                onPress={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-full border ${
-                  selectedCategory === cat
-                    ? "bg-emerald-500 border-emerald-300"
-                    : "bg-card border-border"
-                }`}
-              >
-                <Text
-                  className={`text-sm font-medium ${
-                    selectedCategory === cat
-                      ? "text-primary-foreground"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {cat}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+          <CategorySelector
+            data={CATEGORIES}
+            selected={selectedCategory}
+            onSelect={setSelectedCategory}
+          />
         </View>
 
         {/* Date Range Filter */}
@@ -232,7 +180,7 @@ export default function HistoryScreen() {
           ) : (
             <FlatList
               data={filteredTransactions}
-              renderItem={renderTransactionItem as any}
+              renderItem={({ item }) => <RenderTransactionItem item={item} />}
               keyExtractor={(item) => item.id}
               scrollEnabled={false}
               contentContainerStyle={{ paddingBottom: 16 }}

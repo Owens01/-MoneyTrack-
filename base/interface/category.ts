@@ -12,3 +12,12 @@ export type CategoryType =
 export interface AddExpenseModalProps {
   onSave: (expense: Expense) => void;
 }
+
+export interface HorizontalSelectorProps {
+  data: string[];
+  selected: string;
+  onSelect: (item: string) => void;
+  keyExtractor?: (item: string, index: number) => string;
+  labelExtractor?: (item: string) => string;
+  contentStyle?: string;
+}

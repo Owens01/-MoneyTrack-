@@ -1,4 +1,5 @@
 import { AddExpenseModalProps, CategoryType } from "@/base/interface/category";
+import CategorySelector from "@/components/global/category/Category";
 import { CustomModal } from "@/components/global/modal/CustomModal";
 import { Calendar, Save } from "lucide-react-native";
 import React, { useState } from "react";
@@ -26,7 +27,7 @@ const CATEGORIES: CategoryType[] = [
 export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState<CategoryType>("Food");
+  const [category, setCategory] = useState("Food");
   const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   const handleSave = () => {
@@ -55,9 +56,7 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
     setAmount("");
     setCategory("Food");
     setDate(new Date().toISOString().split("T")[0]);
-    magicModal.hide(
-      "add-expense-modal"
-    );
+    magicModal.hide("add-expense-modal");
   };
 
   const footer = (
@@ -113,33 +112,11 @@ export function AddExpenseModal({ onSave }: AddExpenseModalProps) {
             <Text className="text-sm font-medium text-foreground mb-2">
               Category
             </Text>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{ gap: 8 }}
-            >
-              {CATEGORIES.map((cat) => (
-                <TouchableOpacity
-                  key={cat}
-                  onPress={() => setCategory(cat)}
-                  className={`px-4 py-2 rounded-full border ${
-                    category === cat
-                      ? "bg-emerald-500 border-emerald-300"
-                      : "bg-input border-border"
-                  }`}
-                >
-                  <Text
-                    className={`text-sm font-medium ${
-                      category === cat
-                        ? "text-primary-foreground"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {cat}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
+            <CategorySelector
+              data={CATEGORIES}
+              selected={category}
+              onSelect={setCategory}
+            />
           </View>
 
           {/* Date Field */}
